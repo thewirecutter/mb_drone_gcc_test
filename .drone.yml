@@ -6,7 +6,7 @@ steps:
    ###################
    # DEVELOPMENT
    ###################
-   -name: deploy_composer_dev
+   - name: deploy_composer_dev
     image: us.gcr.io/nyt-registry-prd/drone-gcc:latest
     settings:
       env_name: mb_composer_dev
