@@ -1,0 +1,63 @@
+kind: pipeline
+name: default
+
+steps:
+   ###################
+   # DEVELOPMENT
+   ###################
+   -name: deploy_composer_dev
+    image: us.gcr.io/nyt-registry-prd/drone-gcc:latest
+    settings:
+      env_name: nyt-mbcompdev-dev
+      location: us-central1
+      zone: us-central1-f
+      node_type: n1-standard-4
+      node_count: 3
+      network: default
+      sub_network: default
+      image_version: composer-1.4.2-airflow-1.10.0
+      service_account: drone-gcc-dev-754@nyt-mbcompdev-dev.iam.gserviceaccount.com
+      # Remove the below entry if you don't have any additional python packages to install.
+      # Otherwise the deployment will fail when it doesn't find the install.txt file.
+      python_packages_file: requirements.txt
+      deploy_strategy:
+         - dags : dags
+         - plugins : plugins
+      airflow_configs:
+         - core-dags_are_paused_at_creation : False
+         - core-max_active_runs_per_dag : 3
+         - webserver-dag_default_view : tree
+      env_vars:
+         - SENDGRID_MAIL_FROM : mb_gcc_drone_dev@nytimes.com
+         - SENDGRID_API_KEY : $$V$$SENDGRID_API_KEY_DEV
+      airflow_vars:
+           ENV : DEV
+      connections:
+         - conn_id : bigquery_default
+           conn_type : google_cloud_platform
+           conn_extra: '{"extra__google_cloud_platform__project": "<your-gcp-project-id>", "extra__google_cloud_platform__key_path": "$$P$$DEV_CREDENTIALS_FOR_RUNNING_AIRFLOW_DAGS" ,"extra__google_cloud_platform__scope": "https://www.googleapis.com/auth/bigquery,https://www.googleapis.com/auth/cloud-platform"}'
+      # These kind of secrets are needed by containers launched by a KubernetesPodOperator.  A container launched by a KubernetesPodOperator won't
+      # be able to access the secrets set to environment variables specified in the 'env_vars' section above.  Only the regular Airflow operators run by an Airflow
+      # worker will be able to access those environment variables.  Instead, this will create a kubernetes secret object which can then be fed to a KubernetesPodOperator as
+      # a parameter so that the container can also access the secrets it needs.
+      kubernetes_secrets:
+        SOME_KUBE_SECRET_1: $$V$$SECRET_1_DEV
+        SOME_KUBE_SECRET_2: $$V$$SECRET_2_DEV
+    # This is where drone variables can be set equal to secrets pulled from drone secrets. Those drone variables that can then in turn
+    # be used in the 'env_vars' section above to make the secrets available in Cloud Composer via environment variables the Airflow workers can access.
+    environment:
+      TOKEN:
+        from_secret: drone-gcc-secret-dev
+      DEV_CREDENTIALS_FOR_RUNNING_AIRFLOW_DAGS:
+        from_secret: dev_credentials_for_running_airflow_dags
+      SENDGRID_API_KEY_DEV:
+        from_secret: sendgrid_api_key_dev
+      SECRET_1_DEV:
+        from_secret: secret_1_dev
+      SECRET_2_DEV:
+        from_secret: secret_2_dev
+    when:
+      event: push
+      branch:
+        - develop
+        - feature/*
