@@ -41,9 +41,9 @@ steps:
       # be able to access the secrets set to environment variables specified in the 'env_vars' section above.  Only the regular Airflow operators run by an Airflow
       # worker will be able to access those environment variables.  Instead, this will create a kubernetes secret object which can then be fed to a KubernetesPodOperator as
       # a parameter so that the container can also access the secrets it needs.
-      kubernetes_secrets:
-        SOME_KUBE_SECRET_1: $$V$$SECRET_1_DEV
-        SOME_KUBE_SECRET_2: $$V$$SECRET_2_DEV
+#      kubernetes_secrets:
+#        SOME_KUBE_SECRET_1: $$V$$SECRET_1_DEV
+#        SOME_KUBE_SECRET_2: $$V$$SECRET_2_DEV
     # This is where drone variables can be set equal to secrets pulled from drone secrets. Those drone variables that can then in turn
     # be used in the 'env_vars' section above to make the secrets available in Cloud Composer via environment variables the Airflow workers can access.
     environment:
@@ -52,11 +52,11 @@ steps:
       DEV_CREDENTIALS_FOR_RUNNING_AIRFLOW_DAGS:
         from_secret: dev_credentials_for_running_airflow_dags
       SENDGRID_API_KEY_DEV:
-        from_secret: sendgrid_api_key_dev
-      SECRET_1_DEV:
-        from_secret: secret_1_dev
-      SECRET_2_DEV:
-        from_secret: secret_2_dev
+        from_secret: send_grid_api_key
+#      SECRET_1_DEV:
+#        from_secret: secret_1_dev
+#      SECRET_2_DEV:
+#        from_secret: secret_2_dev
     when:
       event: push
       branch:
