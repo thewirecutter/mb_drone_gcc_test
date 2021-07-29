@@ -14,8 +14,8 @@ steps:
       zone: us-east1-f
       node_type: n1-standard-4
       node_count: 3
-      network: nyt-wccomposer-dev-net
-      sub_network: nyt-wccomposer
+      network: default
+      sub_network: default
       image_version: composer-1.15.0-airflow-1.10.14
       service_account: drone-gcc-dev-754@nyt-mbcompdev-dev.iam.gserviceaccount.com
       # Remove the below entry if you don't have any additional python packages to install.
