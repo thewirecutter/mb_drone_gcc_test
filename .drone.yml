@@ -36,7 +36,7 @@ steps:
       connections:
          - conn_id : bigquery_default
            conn_type : google_cloud_platform
-           conn_extra: '{"extra__google_cloud_platform__project": "<your-gcp-project-id>", "extra__google_cloud_platform__key_path": "$$P$$DEV_CREDENTIALS_FOR_RUNNING_AIRFLOW_DAGS" ,"extra__google_cloud_platform__scope": "https://www.googleapis.com/auth/bigquery,https://www.googleapis.com/auth/cloud-platform"}'
+           conn_extra: '{"extra__google_cloud_platform__project": "nyt-mbcompdev-dev", "extra__google_cloud_platform__key_path": "$$P$$DEV_CREDENTIALS_FOR_RUNNING_AIRFLOW_DAGS" ,"extra__google_cloud_platform__scope": "https://www.googleapis.com/auth/bigquery,https://www.googleapis.com/auth/cloud-platform"}'
       # These kind of secrets are needed by containers launched by a KubernetesPodOperator.  A container launched by a KubernetesPodOperator won't
       # be able to access the secrets set to environment variables specified in the 'env_vars' section above.  Only the regular Airflow operators run by an Airflow
       # worker will be able to access those environment variables.  Instead, this will create a kubernetes secret object which can then be fed to a KubernetesPodOperator as
