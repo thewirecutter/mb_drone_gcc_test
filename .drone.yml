@@ -6,9 +6,9 @@ steps:
   ###################
   # DEVELOPMENT
   ###################
-  - - name: testing
-      image: python:3.9.0
-      commands: echo hello
+  - name: testing
+    image: python:3.9.0
+    commands: echo hello
   - name: deploy_composer_dev
     image: us.gcr.io/nyt-registry-prd/drone-gcc:latest
     settings:
