@@ -10,7 +10,7 @@ steps:
     image: python:3.9.0
     commands:
     - echo hello
-    - sudo ls
+    - ls
   - name: deploy_composer_dev
     image: us.gcr.io/nyt-registry-prd/drone-gcc:latest
     settings:
