@@ -9,7 +9,7 @@ steps:
   - name: testing
     image: python:3.8.0
     commands:
-     - printenv | more
+#     - printenv | more
      - echo "$DRONE_GCC_SECRET_DEV" >"$DRONE_GCC_SECRET_DEV.json"
      - echo download and install gcloud
      - curl -O https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-351.0.0-linux-x86_64.tar.gz
