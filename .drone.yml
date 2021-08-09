@@ -7,12 +7,18 @@ steps:
   # DEVELOPMENT
   ###################
   - name: testing
-    image: python:3.9.0
+    image: python:3.8.0
     commands:
-     - git clone https://github.com/thewirecutter/mb_drone_gcc_test && git checkout master
-     - cd mb_drone_gcc_test
-     - ls
-     - gcloud composer environments --help
+     - echo download and install gcloud
+     - curl -O https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-351.0.0-linux-x86_64.tar.gz
+     - tar -xfv google-cloud-sdk-351.0.0-linux-x86_64.tar.gz
+     - ./google-cloud-sdk/install.sh
+     - ./google-cloud-sdk/bin/gcloud init
+     - gcloud init
+#     - git clone https://github.com/thewirecutter/mb_drone_gcc_test && git checkout master
+#     - cd mb_drone_gcc_test
+#     - ls
+#     - gcloud composer environments --help
 
 #  - name: deploy_composer_dev
 #    image: us.gcr.io/nyt-registry-prd/drone-gcc:latest
