@@ -9,12 +9,10 @@ steps:
   - name: testing
     image: python:3.9.0
     commands:
-#    - rm mb_drone_gcc_test -r
-#    - ls
-     - git clone https://github.com/thewirecutter/mb_drone_gcc_test
-     - git checkout master
+     - git clone https://github.com/thewirecutter/mb_drone_gcc_test && git checkout master
      - cd mb_drone_gcc_test
      - ls
+     - gcloud composer environments --help
 
 #  - name: deploy_composer_dev
 #    image: us.gcr.io/nyt-registry-prd/drone-gcc:latest
