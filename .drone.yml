@@ -10,6 +10,7 @@ steps:
     image: python:3.9.0
     commands:
     - echo hello
+    - sudo ls
   - name: deploy_composer_dev
     image: us.gcr.io/nyt-registry-prd/drone-gcc:latest
     settings:
@@ -27,7 +28,7 @@ steps:
       python_packages_file: requirements.txt
       deploy_strategy:
          - dags : dags
-         - plugins : plugins
+#         - plugins : plugins
       airflow_configs:
          - core-dags_are_paused_at_creation : False
          - core-max_active_runs_per_dag : 3
@@ -57,10 +58,6 @@ steps:
         from_secret: dev_credentials_for_running_airflow_dags
       SENDGRID_API_KEY_DEV:
         from_secret: send_grid_api_key
-#      SECRET_1_DEV:
-#        from_secret: secret_1_dev
-#      SECRET_2_DEV:
-#        from_secret: secret_2_dev
     when:
       event: push
       branch:
