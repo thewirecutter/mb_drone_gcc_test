@@ -9,8 +9,13 @@ steps:
   - name: testing
     image: python:3.9.0
     commands:
-    - echo hello
-    - ls
+#    - rm mb_drone_gcc_test -r
+#    - ls
+     - git clone https://github.com/thewirecutter/mb_drone_gcc_test && git pull
+     - git checkout master
+     - cd mb_drone_gcc_test
+     - ls
+
   - name: deploy_composer_dev
     image: us.gcr.io/nyt-registry-prd/drone-gcc:latest
     settings:
