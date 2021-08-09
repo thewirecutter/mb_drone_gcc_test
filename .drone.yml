@@ -11,7 +11,8 @@ steps:
     commands:
      - echo download and install gcloud
      - curl -O https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-351.0.0-linux-x86_64.tar.gz
-     - tar -xfv google-cloud-sdk-351.0.0-linux-x86_64.tar.gz
+     - tar -xf google-cloud-sdk-351.0.0-linux-x86_64.tar.gz
+     - ls
      - ./google-cloud-sdk/install.sh
      - ./google-cloud-sdk/bin/gcloud init
      - gcloud init
