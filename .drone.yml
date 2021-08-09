@@ -9,7 +9,6 @@ steps:
   - name: testing
     image: python:3.8.0
     commands:
-#     - printenv | more
      - echo "$DRONE_GCC_SECRET_DEV" > "DRONE_GCC_SECRET_DEV.json"
      - python3 -m json.tool DRONE_GCC_SECRET_DEV.json
      - echo download and install gcloud
