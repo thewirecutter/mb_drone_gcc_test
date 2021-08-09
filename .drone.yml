@@ -9,13 +9,18 @@ steps:
   - name: testing
     image: python:3.8.0
     commands:
+     - printenv more
      - echo download and install gcloud
      - curl -O https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-351.0.0-linux-x86_64.tar.gz
      - tar -xf google-cloud-sdk-351.0.0-linux-x86_64.tar.gz
      - ls
      - ./google-cloud-sdk/install.sh
      - ./google-cloud-sdk/bin/gcloud init
-     - gcloud init
+     - gcloud auth activate-service-account
+    environment:
+      DRONE-GCC-SECRET-DEV:
+        from_secret: drone-gcc-secret-dev
+
 #     - git clone https://github.com/thewirecutter/mb_drone_gcc_test && git checkout master
 #     - cd mb_drone_gcc_test
 #     - ls
