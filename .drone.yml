@@ -11,7 +11,7 @@ steps:
     commands:
       - python3 ./create_json.py
       - gcloud auth activate-service-account --key-file=DRONE_GCC_SECRET_DEV.json --project=nyt-mbcompdev-dev
-      - gcloud composer environments run mb-composer-dev --location us-east1 --import variable.json
+      - gcloud composer environments run mb-composer-dev --location us-east1 variables --import variable.json
     environment:
       DRONE_GCC_SECRET_DEV:
         from_secret: drone-gcc-secret-dev
