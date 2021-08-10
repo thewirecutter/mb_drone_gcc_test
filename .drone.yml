@@ -9,34 +9,17 @@ steps:
   - name: testing
     image: python:3.8.0
     commands:
-#      - printenv | more
-      - python3 ./create_json.py
-      - echo "$DRONE_GCC_SECRET_DEV" > "DRONE_GCC_SECRET_DEV.json"
+
       - echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] https://packages.cloud.google.com/apt cloud-sdk main" | tee -a /etc/apt/sources.list.d/google-cloud-sdk.list
       - apt-get install apt-transport-https ca-certificates gnupg
       - curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key --keyring /usr/share/keyrings/cloud.google.gpg add -
       - apt-get update && apt-get install google-cloud-sdk -y -V
+      - python3 ./create_json.py
       - gcloud auth activate-service-account drone-gcc-dev-754@nyt-mbcompdev-dev.iam.gserviceaccount.com --key-file=./DRONE_GCC_SECRET_DEV.json --project=nyt-mbcompdev-dev
       - gcloud composer environments --help
     environment:
       DRONE_GCC_SECRET_DEV:
         from_secret: drone-gcc-secret-dev
-
-#     - echo download and install gcloud
-#     - curl -O https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-351.0.0-linux-x86_64.tar.gz
-#     - tar -xf google-cloud-sdk-351.0.0-linux-x86_64.tar.gz
-#     - ./google-cloud-sdk/install.sh
-#     - . './google-cloud-sdk/path.bash.inc'
-#     - . './google-cloud-sdk/completion.bash.inc'
-#     - gcloud auth activate-service-account drone-gcc-dev-754@nyt-mbcompdev-dev.iam.gserviceaccount.com --key-file=./DRONE_GCC_SECRET_DEV.json --project=nyt-mbcompdev-dev
-#     - gcloud composer environments --help
-#    environment:
-
-
-#     - git clone https://github.com/thewirecutter/mb_drone_gcc_test && git checkout master
-#     - cd mb_drone_gcc_test
-#     - ls
-#     - gcloud composer environments --help
 
 #  - name: deploy_composer_dev
 #    image: us.gcr.io/nyt-registry-prd/drone-gcc:latest
