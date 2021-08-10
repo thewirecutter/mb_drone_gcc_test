@@ -54,7 +54,7 @@ steps:
 #        from_secret: send_grid_api_key
 
   - name: insert_airflow_vars_from_json
-    image: us.gcr.io/nyt-registry-prd/drone-gcc:latest
+    image: python:3.8.0
     commands:
       - echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] https://packages.cloud.google.com/apt cloud-sdk main" | tee -a /etc/apt/sources.list.d/google-cloud-sdk.list
       - apt-get install apt-transport-https ca-certificates gnupg
