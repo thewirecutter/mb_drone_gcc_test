@@ -10,15 +10,13 @@ steps:
     image: python:3.8.0
     commands:
 #      - printenv | more
-      - curl https://sdk.cloud.google.com > install.sh
-      - bash install.sh --disable-prompts
       - python3 ./create_json.py
-#      - echo "$DRONE_GCC_SECRET_DEV" > "DRONE_GCC_SECRET_DEV.json"
-#      - snap install google-cloud-sdk --classic
-#      - echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] https://packages.cloud.google.com/apt cloud-sdk main" | tee -a /etc/apt/sources.list.d/google-cloud-sdk.list
-#      - apt-get install apt-transport-https ca-certificates gnupg
-#      - curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key --keyring /usr/share/keyrings/cloud.google.gpg add -
-#      - apt-get update && apt-get install google-cloud-sdk -y -V
+      - echo "$DRONE_GCC_SECRET_DEV" > "DRONE_GCC_SECRET_DEV.json"
+      - snap install google-cloud-sdk --classic
+      - echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] https://packages.cloud.google.com/apt cloud-sdk main" | tee -a /etc/apt/sources.list.d/google-cloud-sdk.list
+      - apt-get install apt-transport-https ca-certificates gnupg
+      - curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key --keyring /usr/share/keyrings/cloud.google.gpg add -
+      - apt-get update && apt-get install google-cloud-sdk -y -V
       - gcloud auth activate-service-account drone-gcc-dev-754@nyt-mbcompdev-dev.iam.gserviceaccount.com --key-file=./DRONE_GCC_SECRET_DEV.json --project=nyt-mbcompdev-dev
       - gcloud composer environments --help
     environment:
