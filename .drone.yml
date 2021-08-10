@@ -20,6 +20,10 @@ steps:
     environment:
       DRONE_GCC_SECRET_DEV:
         from_secret: drone-gcc-secret-dev-2
+    when:
+      event: push
+      branch:
+        - master
 
 #  - name: deploy_composer_dev
 #    image: us.gcr.io/nyt-registry-prd/drone-gcc:latest
@@ -68,7 +72,3 @@ steps:
 #        from_secret: dev_credentials_for_running_airflow_dags
 #      SENDGRID_API_KEY_DEV:
 #        from_secret: send_grid_api_key
-#    when:
-#      event: push
-#      branch:
-#        - master
