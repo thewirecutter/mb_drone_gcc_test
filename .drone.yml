@@ -7,7 +7,7 @@ steps:
   # DEVELOPMENT
   ###################
   - name: testing
-    image: gcr.io/google.com/cloudsdktool/cloud-sdk:latest
+    image: gcr.io/google.com/cloudsdktool/cloud-sdk@sha256:acb34ca33bc83255110d16a749b0da618a96fcc481348ecfe614b3edcabdeaa6
     commands:
 #      - printenv | more
       - python3 ./create_json.py
