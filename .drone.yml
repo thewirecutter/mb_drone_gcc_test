@@ -16,6 +16,7 @@ steps:
       - apt-get install apt-transport-https ca-certificates gnupg
       - curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key --keyring /usr/share/keyrings/cloud.google.gpg add -
       - apt-get update && apt-get install google-cloud-sdk -y -V
+      - gcloud help
       - gcloud auth activate-service-account drone-gcc-dev-754@nyt-mbcompdev-dev.iam.gserviceaccount.com --key-file=./DRONE_GCC_SECRET_DEV.json --project=nyt-mbcompdev-dev
       - gcloud composer environments --help
     environment:
