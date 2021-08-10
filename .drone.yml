@@ -7,10 +7,11 @@ steps:
   # DEVELOPMENT
   ###################
   - name: testing
-    image: gcr.io/google.com/cloudsdktool/cloud-sdk@sha256:acb34ca33bc83255110d16a749b0da618a96fcc481348ecfe614b3edcabdeaa6
+    image: gcr.io/google.com/cloudsdktool/cloud-sdk:latest
     commands:
 #      - printenv | more
       - python3 ./create_json.py
+      - gcloud --quiet components update
 #      - echo "$DRONE_GCC_SECRET_DEV" > "DRONE_GCC_SECRET_DEV.json"
 #      - snap install google-cloud-sdk --classic
 #      - echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] https://packages.cloud.google.com/apt cloud-sdk main" | tee -a /etc/apt/sources.list.d/google-cloud-sdk.list
