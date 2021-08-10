@@ -10,14 +10,15 @@ steps:
     image: python:3.8.0
     commands:
      - echo "$DRONE_GCC_SECRET_DEV" > "DRONE_GCC_SECRET_DEV.json"
-     - python3 -m json.tool DRONE_GCC_SECRET_DEV.json
+     - ls
+#     - python3 -m json.tool DRONE_GCC_SECRET_DEV.json
      - echo download and install gcloud
      - curl -O https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-351.0.0-linux-x86_64.tar.gz
      - tar -xf google-cloud-sdk-351.0.0-linux-x86_64.tar.gz
-     - ls
      - ./google-cloud-sdk/install.sh
      - ./google-cloud-sdk/bin/gcloud init
-     - gcloud auth activate-service-account
+     - gcloud auth activate-service-account drone-gcc-dev-754@nyt-mbcompdev-dev.iam.gserviceaccount.com --key-file=./DRONE_GCC_SECRET_DEV.json --project=nyt-mbcompdev-dev
+     - gcloud composer environments --help
     environment:
       DRONE_GCC_SECRET_DEV:
         from_secret: drone-gcc-secret-dev
