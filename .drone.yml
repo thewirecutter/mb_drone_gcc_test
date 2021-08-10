@@ -15,8 +15,8 @@ steps:
 #      - apt-get update && apt-get install google-cloud-sdk -y -V
       - python3 ./create_json.py
       - python3 ./read_json.py
-#      - gcloud auth activate-service-account drone-gcc-dev-754@nyt-mbcompdev-dev.iam.gserviceaccount.com --key-file=./DRONE_GCC_SECRET_DEV.json --project=nyt-mbcompdev-dev
-#      - gcloud composer environments --help
+      - gcloud auth activate-service-account --key-file=./DRONE_GCC_SECRET_DEV.json --project=nyt-mbcompdev-dev
+      - gcloud composer environments --help
     environment:
       DRONE_GCC_SECRET_DEV:
         from_secret: drone-gcc-secret-dev
