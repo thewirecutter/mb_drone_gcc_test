@@ -17,7 +17,7 @@ steps:
      - tar -xf google-cloud-sdk-351.0.0-linux-x86_64.tar.gz
      - ./google-cloud-sdk/install.sh
      - gcloud auth activate-service-account drone-gcc-dev-754@nyt-mbcompdev-dev.iam.gserviceaccount.com --key-file=./DRONE_GCC_SECRET_DEV.json --project=nyt-mbcompdev-dev
-     - gcloud composer environments --help
+#     - gcloud composer environments --help
     environment:
       DRONE_GCC_SECRET_DEV:
         from_secret: drone-gcc-secret-dev
